@@ -1,4 +1,4 @@
-// node_modules/@netlify/blobs/dist/chunk-XR3MUBBK.js
+// site/node_modules/@netlify/blobs/dist/chunk-XR3MUBBK.js
 var NF_ERROR = "x-nf-error";
 var NF_REQUEST_ID = "x-nf-request-id";
 var BlobsInternalError = class extends Error {
@@ -312,7 +312,7 @@ var getClientOptions = (options, contextOverride) => {
   return clientOptions;
 };
 
-// node_modules/@netlify/blobs/dist/main.js
+// site/node_modules/@netlify/blobs/dist/main.js
 var DEPLOY_STORE_PREFIX = "deploy:";
 var LEGACY_STORE_INTERNAL_PREFIX = "netlify-internal/legacy-namespace/";
 var SITE_STORE_PREFIX = "site:";
@@ -603,10 +603,10 @@ var getStore = (input) => {
   );
 };
 
-// src/api.mjs
+// site/src/api.mjs
 import crypto from "node:crypto";
 
-// src/openings.json
+// site/src/openings.json
 var openings_default = {
   w: [
     {
@@ -2591,12 +2591,22 @@ var openings_default = {
   ]
 };
 
-// src/api.mjs
+// site/src/api.mjs
 var TOKEN_DAYS = 30;
 var LAUNCH = Date.UTC(2026, 9, 17);
 var DAILY_COUNT = 5;
 var DAILY_MAX_SCORE = 3e3;
 var NAME_RE = /^[A-Za-z0-9_-]{3,20}$/;
+var RESERVED = ["admin", "administrator", "moderator", "support", "staff", "official", "system", "root", "owner", "guessthechessopening", "guesstheopening", "agnosticsolutions", "agnostic", "anthropic", "claude", "netlify", "resend", "null", "undefined", "anonymous"];
+var RUDE = ["fuck", "shit", "nigger", "nigga", "faggot", "retard", "whore", "bastard", "nazi", "hitler", "pussy", "paedo", "tranny", "bitch"];
+var RUDE_WHOLE = ["cunt", "dick", "cock", "fag", "rape", "rapist", "slut", "twat", "wank", "pedo", "porn", "kike", "spic", "chink"];
+var squash = (n) => n.toLowerCase().replace(/[01345$@!7]/g, (c) => ({ 0: "o", 1: "i", 3: "e", 4: "a", 5: "s", $: "s", "@": "a", "!": "i", 7: "t" })[c]).replace(/[^a-z]/g, "");
+function nameAllowed(n) {
+  const q = squash(n);
+  if (RESERVED.some((w) => q === w || q.startsWith(w) && q.length - w.length <= 2)) return false;
+  if (RUDE_WHOLE.some((w) => q === w || q.startsWith(w) && q.length - w.length <= 2 || q.endsWith(w) && q.length - w.length <= 2)) return false;
+  return !RUDE.some((w) => q.includes(w));
+}
 var opts = (name) => ({ name, consistency: "strong" });
 var json = (data, status = 200) => Response.json(data, { status });
 var HttpError = class extends Error {
@@ -2790,6 +2800,7 @@ var routes = {
     const pw = String(b.password ?? "");
     const email = String(b.email ?? "").trim().toLowerCase();
     if (!NAME_RE.test(name)) fail(400, "Username must be 3-20 letters, numbers, _ or -");
+    if (!nameAllowed(name)) fail(400, "That username isn't available. Please choose another.");
     if (pw.length < 6) fail(400, "Password must be at least 6 characters");
     if (email && !EMAIL_RE.test(email)) fail(400, "That email address doesn't look right. Leave it blank if you'd rather not add one.");
     const user = { id: crypto.randomUUID(), username: name, lower: name.toLowerCase(), password_hash: await hashPassword(pw), created_at: nowIso() };
@@ -2963,11 +2974,6 @@ var routes = {
     const all = await readAll(getStore(opts("daily")), `${d}/`);
     all.sort((a, b) => b.score - a.score || (a.created_at < b.created_at ? -1 : 1));
     return json({ date: d, rows: all.slice(0, 50).map((r) => ({ username: r.username, score: r.score, grid: r.grid })) });
-  },
-  "GET /leaderboard/xp": async () => {
-    const all = await readAll(getStore(opts("xp")));
-    all.sort((a, b) => b.xp - a.xp);
-    return json({ rows: all.slice(0, 50).map((r) => ({ username: r.username, xp: r.xp })) });
   },
   "GET /": async () => json({ message: "Guess the Opening API" })
 };
