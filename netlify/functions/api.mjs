@@ -1,4 +1,4 @@
-// node_modules/@netlify/blobs/dist/chunk-XR3MUBBK.js
+// site/node_modules/@netlify/blobs/dist/chunk-XR3MUBBK.js
 var NF_ERROR = "x-nf-error";
 var NF_REQUEST_ID = "x-nf-request-id";
 var BlobsInternalError = class extends Error {
@@ -312,7 +312,7 @@ var getClientOptions = (options, contextOverride) => {
   return clientOptions;
 };
 
-// node_modules/@netlify/blobs/dist/main.js
+// site/node_modules/@netlify/blobs/dist/main.js
 var DEPLOY_STORE_PREFIX = "deploy:";
 var LEGACY_STORE_INTERNAL_PREFIX = "netlify-internal/legacy-namespace/";
 var SITE_STORE_PREFIX = "site:";
@@ -603,10 +603,10 @@ var getStore = (input) => {
   );
 };
 
-// src/api.mjs
+// site/src/api.mjs
 import crypto from "node:crypto";
 
-// src/openings.json
+// site/src/openings.json
 var openings_default = {
   w: [
     {
@@ -2591,7 +2591,7 @@ var openings_default = {
   ]
 };
 
-// src/api.mjs
+// site/src/api.mjs
 var TOKEN_DAYS = 30;
 var LAUNCH = Date.UTC(2026, 9, 17);
 var DAILY_COUNT = 5;
@@ -2777,6 +2777,12 @@ async function readAll(store, prefix) {
   const rows = await Promise.all(blobs.map((b) => store.get(b.key, { type: "json" })));
   return rows.filter(Boolean);
 }
+async function setIfNew(store, key, value) {
+  const r = await store.setJSON(key, value, { onlyIfNew: true });
+  if (r && typeof r.modified === "boolean") return r.modified;
+  const cur = await store.get(key, { type: "json" });
+  return !!cur && JSON.stringify(cur) === JSON.stringify(value);
+}
 var routes = {
   "POST /auth/register": async (req, ctx) => {
     const b = await body(req);
@@ -2789,7 +2795,7 @@ var routes = {
     const user = { id: crypto.randomUUID(), username: name, lower: name.toLowerCase(), password_hash: await hashPassword(pw), created_at: nowIso() };
     if (email) user.email_pending = email;
     const users = getStore(opts("users"));
-    const { modified } = await users.setJSON(user.lower, user, { onlyIfNew: true });
+    const modified = await setIfNew(users, user.lower, user);
     if (!modified) fail(409, "That username is taken");
     let emailSent = false;
     if (email && await allow("email-ip", ctx.ip || "x", 10)) {
@@ -2820,7 +2826,7 @@ var routes = {
     const u = await users.get(rec.user, { type: "json" });
     if (!u || u.email_pending !== rec.email) fail(400, "That link is out of date. Please ask for a new one from your profile.");
     const emails = getStore(opts("emails"));
-    const { modified } = await emails.setJSON(rec.email, { user: u.lower }, { onlyIfNew: true });
+    const modified = await setIfNew(emails, rec.email, { user: u.lower });
     if (!modified) {
       const owner = await emails.get(rec.email, { type: "json" });
       if (!owner || owner.user !== u.lower) fail(409, "That email is already linked to a different account.");
@@ -2936,7 +2942,7 @@ var routes = {
     const grid = (Array.isArray(b.grid) ? b.grid : []).filter((x) => typeof x === "string").slice(0, DAILY_COUNT).map((x) => x.slice(0, 16));
     const store = getStore(opts("daily"));
     const rec = { username: u.username, date: b.date, score, grid, created_at: nowIso() };
-    const { modified } = await store.setJSON(`${b.date}/${u.lower}`, rec, { onlyIfNew: true });
+    const modified = await setIfNew(store, `${b.date}/${u.lower}`, rec);
     if (!modified) fail(409, "You have already played today's challenge");
     const all = await readAll(store, `${b.date}/`);
     return json({ ok: true, rank: all.filter((r) => r.score > score).length + 1 });
