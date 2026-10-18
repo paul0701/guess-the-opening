@@ -1,8 +1,8 @@
 {
-  "name": "guess-the-opening-netlify",
+  "name": "guess-the-opening",
   "private": true,
   "type": "module",
-  "scripts": { "build:fn": "esbuild src/api.mjs --bundle --platform=node --format=esm --target=node20 --outfile=netlify/functions/api.mjs" },
-  "dependencies": { "@netlify/blobs": "^8.1.0" },
-  "devDependencies": { "esbuild": "^0.24.0" }
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
 }
