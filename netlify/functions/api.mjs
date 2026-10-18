@@ -133,13 +133,13 @@ var DEFAULT_RETRY_DELAY = getEnvironment().get("NODE_ENV") === "test" ? 1 : 5e3;
 var MIN_RETRY_DELAY = 1e3;
 var MAX_RETRY = 5;
 var RATE_LIMIT_HEADER = "X-RateLimit-Reset";
-var fetchAndRetry = async (fetch, url, options, attemptsLeft = MAX_RETRY) => {
+var fetchAndRetry = async (fetch2, url, options, attemptsLeft = MAX_RETRY) => {
   try {
-    const res = await fetch(url, options);
+    const res = await fetch2(url, options);
     if (attemptsLeft > 0 && (res.status === 429 || res.status >= 500)) {
       const delay = getDelay(res.headers.get(RATE_LIMIT_HEADER));
       await sleep(delay);
-      return fetchAndRetry(fetch, url, options, attemptsLeft - 1);
+      return fetchAndRetry(fetch2, url, options, attemptsLeft - 1);
     }
     return res;
   } catch (error) {
@@ -148,7 +148,7 @@ var fetchAndRetry = async (fetch, url, options, attemptsLeft = MAX_RETRY) => {
     }
     const delay = getDelay();
     await sleep(delay);
-    return fetchAndRetry(fetch, url, options, attemptsLeft - 1);
+    return fetchAndRetry(fetch2, url, options, attemptsLeft - 1);
   }
 };
 var getDelay = (rateLimitReset) => {
@@ -162,11 +162,11 @@ var sleep = (ms) => new Promise((resolve) => {
 });
 var SIGNED_URL_ACCEPT_HEADER = "application/json;type=signed-url";
 var Client = class {
-  constructor({ apiURL, consistency, edgeURL, fetch, region, siteID, token, uncachedEdgeURL }) {
+  constructor({ apiURL, consistency, edgeURL, fetch: fetch2, region, siteID, token, uncachedEdgeURL }) {
     this.apiURL = apiURL;
     this.consistency = consistency ?? "eventual";
     this.edgeURL = edgeURL;
-    this.fetch = fetch ?? globalThis.fetch;
+    this.fetch = fetch2 ?? globalThis.fetch;
     this.region = region;
     this.siteID = siteID;
     this.token = token;
@@ -2627,7 +2627,8 @@ async function secret() {
 var b64 = (x) => Buffer.from(x).toString("base64url");
 async function makeToken(user) {
   const head = b64(JSON.stringify({ alg: "HS256", typ: "JWT" }));
-  const body2 = b64(JSON.stringify({ sub: user.lower, exp: Math.floor(Date.now() / 1e3) + TOKEN_DAYS * 86400 }));
+  const iat = Math.floor(Date.now() / 1e3);
+  const body2 = b64(JSON.stringify({ sub: user.lower, iat, exp: iat + TOKEN_DAYS * 86400 }));
   const sig = crypto.createHmac("sha256", await secret()).update(`${head}.${body2}`).digest("base64url");
   return `${head}.${body2}.${sig}`;
 }
@@ -2657,14 +2658,93 @@ async function verifyPassword(pw, stored) {
   const got = await scrypt(pw, Buffer.from(s, "hex"));
   return want.length === got.length && crypto.timingSafeEqual(want, got);
 }
-var publicUser = (u) => ({ id: u.id, username: u.username });
+var maskEmail = (e) => {
+  const [l, d] = e.split("@");
+  return `${l[0]}${"*".repeat(Math.max(1, Math.min(l.length - 1, 5)))}@${d}`;
+};
+var publicUser = (u) => ({
+  id: u.id,
+  username: u.username,
+  email: u.email ? maskEmail(u.email) : u.email_pending ? maskEmail(u.email_pending) : null,
+  email_status: u.email ? "verified" : u.email_pending ? "pending" : "none"
+});
 async function currentUser(req) {
   const h = req.headers.get("authorization") || "";
   if (!h.startsWith("Bearer ")) fail(401, "Not authenticated");
   const p = await readToken(h.slice(7));
   const user = await getStore(opts("users")).get(p.sub, { type: "json" });
   if (!user) fail(401, "User not found");
+  if ((p.iat || 0) < (user.pw_changed_at || 0)) fail(401, "Session expired");
   return user;
+}
+var EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/;
+var sha = (s) => crypto.createHash("sha256").update(String(s)).digest("hex");
+var esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+var VERIFY_MS = 24 * 3600 * 1e3;
+var RESET_MS = 30 * 60 * 1e3;
+async function allow(kind, id, max) {
+  const store = getStore(opts("limits"));
+  const key = `${kind}/${sha(id).slice(0, 32)}/${Math.floor(Date.now() / 36e5)}`;
+  const cur = await store.get(key, { type: "json" }) || { n: 0 };
+  if (cur.n >= max) return false;
+  await store.setJSON(key, { n: cur.n + 1 });
+  return true;
+}
+function siteUrl(req, ctx) {
+  const env = Netlify.env.get("SITE_URL");
+  const base = env || ctx?.site?.url || new URL(req.url).origin;
+  return base.replace(/\/+$/, "");
+}
+async function sendEmail({ to, subject, text, html }) {
+  const key = Netlify.env.get("RESEND_API_KEY");
+  if (!key) fail(503, "Email isn't switched on for this site yet.");
+  const from = Netlify.env.get("FROM_EMAIL") || "Guess the Opening <guess-the-opening@agnosticsolutions.co.uk>";
+  const replyTo = Netlify.env.get("REPLY_TO");
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from, to: [to], subject, text, html, ...replyTo ? { reply_to: replyTo } : {} })
+  });
+  if (!res.ok) {
+    console.error("resend failed", res.status, await res.text());
+    fail(502, "We couldn't send that email just now. Please try again in a bit.");
+  }
+}
+async function makeLinkToken(type, data, ttl) {
+  const raw = crypto.randomBytes(32).toString("hex");
+  await getStore(opts("link-tokens")).setJSON(sha(raw), { type, ...data, exp: Date.now() + ttl });
+  return raw;
+}
+async function takeLinkToken(raw, type) {
+  const store = getStore(opts("link-tokens"));
+  const k = sha(raw ?? "");
+  const rec = await store.get(k, { type: "json" });
+  if (!rec || rec.type !== type || rec.exp < Date.now()) fail(400, "That link has expired or was already used. Please ask for a new one.");
+  await store.delete(k);
+  return rec;
+}
+function mailShell(heading, lines, linkUrl, linkLabel) {
+  const text = `${heading}
+
+${lines.join("\n\n")}
+
+${linkUrl}
+`;
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:0 auto;padding:24px;color:#1c2540">
+<h2 style="margin:0 0 16px">${esc(heading)}</h2>
+${lines.map((l) => `<p style="line-height:1.5">${esc(l)}</p>`).join("")}
+<p style="margin:24px 0"><a href="${esc(linkUrl)}" style="background:#d4a843;color:#0b132b;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold">${esc(linkLabel)}</a></p>
+<p style="font-size:12px;color:#667">Or paste this into your browser:<br>${esc(linkUrl)}</p></div>`;
+  return { text, html };
+}
+async function sendVerifyEmail(req, ctx, user, email) {
+  const raw = await makeLinkToken("verify", { user: user.lower, email }, VERIFY_MS);
+  const url = `${siteUrl(req, ctx)}/?verify=${raw}`;
+  const m = mailShell("Confirm your email", [
+    `Hi ${user.username}, please confirm this email address for your Guess the Opening account. It lets you reset your password if you ever forget it.`,
+    "This link works for 24 hours. If you didn't ask for this, you can ignore the email."
+  ], url, "Confirm my email");
+  await sendEmail({ to: email, subject: "Confirm your email for Guess the Opening", ...m });
 }
 async function body(req) {
   try {
@@ -2698,16 +2778,111 @@ async function readAll(store, prefix) {
   return rows.filter(Boolean);
 }
 var routes = {
-  "POST /auth/register": async (req) => {
+  "POST /auth/register": async (req, ctx) => {
     const b = await body(req);
     const name = String(b.username ?? "").trim();
     const pw = String(b.password ?? "");
+    const email = String(b.email ?? "").trim().toLowerCase();
     if (!NAME_RE.test(name)) fail(400, "Username must be 3-20 letters, numbers, _ or -");
     if (pw.length < 6) fail(400, "Password must be at least 6 characters");
+    if (email && !EMAIL_RE.test(email)) fail(400, "That email address doesn't look right. Leave it blank if you'd rather not add one.");
     const user = { id: crypto.randomUUID(), username: name, lower: name.toLowerCase(), password_hash: await hashPassword(pw), created_at: nowIso() };
-    const { modified } = await getStore(opts("users")).setJSON(user.lower, user, { onlyIfNew: true });
+    if (email) user.email_pending = email;
+    const users = getStore(opts("users"));
+    const { modified } = await users.setJSON(user.lower, user, { onlyIfNew: true });
     if (!modified) fail(409, "That username is taken");
-    return json({ token: await makeToken(user), user: publicUser(user) });
+    let emailSent = false;
+    if (email && await allow("email-ip", ctx.ip || "x", 10)) {
+      try {
+        await sendVerifyEmail(req, ctx, user, email);
+        emailSent = true;
+      } catch (e) {
+        console.error("verify email not sent", e.detail || e);
+      }
+    }
+    return json({ token: await makeToken(user), user: publicUser(user), email_sent: emailSent });
+  },
+  "POST /auth/email": async (req, ctx) => {
+    const u = await currentUser(req);
+    const b = await body(req);
+    const email = String(b.email ?? "").trim().toLowerCase();
+    if (!EMAIL_RE.test(email)) fail(400, "That email address doesn't look right.");
+    if (!await allow("email-user", u.lower, 5) || !await allow("email-ip", ctx.ip || "x", 10)) fail(429, "Too many emails requested. Please try again in an hour.");
+    await sendVerifyEmail(req, ctx, u, email);
+    u.email_pending = email;
+    await getStore(opts("users")).setJSON(u.lower, u);
+    return json({ ok: true, user: publicUser(u) });
+  },
+  "POST /auth/verify-email": async (req) => {
+    const b = await body(req);
+    const rec = await takeLinkToken(b.token, "verify");
+    const users = getStore(opts("users"));
+    const u = await users.get(rec.user, { type: "json" });
+    if (!u || u.email_pending !== rec.email) fail(400, "That link is out of date. Please ask for a new one from your profile.");
+    const emails = getStore(opts("emails"));
+    const { modified } = await emails.setJSON(rec.email, { user: u.lower }, { onlyIfNew: true });
+    if (!modified) {
+      const owner = await emails.get(rec.email, { type: "json" });
+      if (!owner || owner.user !== u.lower) fail(409, "That email is already linked to a different account.");
+    }
+    if (u.email && u.email !== rec.email) await emails.delete(u.email);
+    u.email = rec.email;
+    delete u.email_pending;
+    await users.setJSON(u.lower, u);
+    return json({ ok: true, username: u.username, email: maskEmail(u.email) });
+  },
+  "POST /auth/forgot": async (req, ctx) => {
+    const b = await body(req);
+    const ident = String(b.identifier ?? "").trim().toLowerCase().slice(0, 200);
+    const generic = () => json({ ok: true });
+    if (!ident) return generic();
+    if (!await allow("forgot-ip", ctx.ip || "x", 8) || !await allow("forgot-id", ident, 3)) return generic();
+    try {
+      let lower = null;
+      if (ident.includes("@")) {
+        const hit = await getStore(opts("emails")).get(ident, { type: "json" });
+        lower = hit?.user || null;
+      } else if (NAME_RE.test(ident)) {
+        lower = ident;
+      }
+      const u = lower ? await getStore(opts("users")).get(lower, { type: "json" }) : null;
+      if (u && u.email) {
+        const raw = await makeLinkToken("reset", { user: u.lower }, RESET_MS);
+        const url = `${siteUrl(req, ctx)}/?reset=${raw}`;
+        const m = mailShell("Reset your password", [
+          `Someone asked to reset the password for the account "${u.username}" on Guess the Opening. If that was you, use the button below to choose a new one.`,
+          "This link works once and expires in 30 minutes. If it wasn't you, ignore this email and your password stays as it is."
+        ], url, "Choose a new password");
+        await sendEmail({ to: u.email, subject: "Reset your Guess the Opening password", ...m });
+      }
+    } catch (e) {
+      console.error("forgot failed", e.detail || e);
+    }
+    return generic();
+  },
+  "POST /auth/reset": async (req, ctx) => {
+    const b = await body(req);
+    const pw = String(b.password ?? "");
+    if (pw.length < 6) fail(400, "Password must be at least 6 characters");
+    const rec = await takeLinkToken(b.token, "reset");
+    const users = getStore(opts("users"));
+    const u = await users.get(rec.user, { type: "json" });
+    if (!u) fail(400, "That link has expired or was already used. Please ask for a new one.");
+    u.password_hash = await hashPassword(pw);
+    u.pw_changed_at = Math.floor(Date.now() / 1e3);
+    await users.setJSON(u.lower, u);
+    if (u.email) {
+      try {
+        const m = mailShell("Your password was changed", [
+          `The password for "${u.username}" on Guess the Opening was just changed. If that was you, there's nothing more to do.`,
+          "If it wasn't you, use Forgot password on the sign-in screen straight away."
+        ], siteUrl(req, ctx), "Open Guess the Opening");
+        await sendEmail({ to: u.email, subject: "Your Guess the Opening password was changed", ...m });
+      } catch (e) {
+        console.error("change notice not sent", e.detail || e);
+      }
+    }
+    return json({ token: await makeToken(u), user: publicUser(u) });
   },
   "POST /auth/login": async (req, ctx) => {
     const b = await body(req);
