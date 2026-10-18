@@ -1,0 +1,1983 @@
+{
+ "w": [
+  {
+   "id": "w-italian-game",
+   "name": "Italian Game",
+   "aliases": [
+    "Giuoco Piano"
+   ],
+   "side": "w",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "w-italian-game--giuoco-pianissimo",
+     "name": "Giuoco Pianissimo",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Bc5",
+      "c3",
+      "Nf6",
+      "d3",
+      "d6",
+      "O-O",
+      "O-O"
+     ],
+     "fu": 5,
+     "vu": 7
+    },
+    {
+     "id": "w-italian-game--evans-gambit",
+     "name": "Evans Gambit",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Bc5",
+      "b4",
+      "Bxb4",
+      "c3",
+      "Ba5",
+      "d4",
+      "exd4",
+      "O-O"
+     ],
+     "fu": 5,
+     "vu": 7
+    },
+    {
+     "id": "w-italian-game--two-knights-defence",
+     "name": "Two Knights Defence",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Nf6",
+      "Ng5",
+      "d5",
+      "exd5",
+      "Na5",
+      "Bb5+",
+      "c6",
+      "dxc6",
+      "bxc6",
+      "Be2",
+      "h6"
+     ],
+     "fu": 5,
+     "vu": 10
+    },
+    {
+     "id": "w-italian-game--fried-liver-attack",
+     "name": "Fried Liver Attack",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bc4",
+      "Nf6",
+      "Ng5",
+      "d5",
+      "exd5",
+      "Nxd5",
+      "Nxf7",
+      "Kxf7",
+      "Qf3+",
+      "Ke6",
+      "Nc3"
+     ],
+     "fu": 5,
+     "vu": 10
+    }
+   ]
+  },
+  {
+   "id": "w-ruy-lopez",
+   "name": "Ruy Lopez",
+   "aliases": [
+    "Spanish Game"
+   ],
+   "side": "w",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "w-ruy-lopez--berlin-defence",
+     "name": "Berlin Defence",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bb5",
+      "Nf6",
+      "O-O",
+      "Nxe4",
+      "d4",
+      "Nd6",
+      "Bxc6",
+      "dxc6",
+      "dxe5",
+      "Nf5",
+      "Qxd8+",
+      "Kxd8"
+     ],
+     "fu": 5,
+     "vu": 6
+    },
+    {
+     "id": "w-ruy-lopez--exchange-variation",
+     "name": "Exchange Variation",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bb5",
+      "a6",
+      "Bxc6",
+      "dxc6",
+      "O-O",
+      "f6",
+      "d4",
+      "exd4",
+      "Nxd4",
+      "c5"
+     ],
+     "fu": 5,
+     "vu": 7
+    },
+    {
+     "id": "w-ruy-lopez--closed-ruy-lopez",
+     "name": "Closed Ruy Lopez",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bb5",
+      "a6",
+      "Ba4",
+      "Nf6",
+      "O-O",
+      "Be7",
+      "Re1",
+      "b5",
+      "Bb3",
+      "d6",
+      "c3",
+      "O-O"
+     ],
+     "fu": 5,
+     "vu": 10
+    },
+    {
+     "id": "w-ruy-lopez--open-ruy-lopez",
+     "name": "Open Ruy Lopez",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bb5",
+      "a6",
+      "Ba4",
+      "Nf6",
+      "O-O",
+      "Nxe4",
+      "d4",
+      "b5",
+      "Bb3",
+      "d5",
+      "dxe5",
+      "Be6"
+     ],
+     "fu": 5,
+     "vu": 10
+    },
+    {
+     "id": "w-ruy-lopez--schliemann-defence",
+     "name": "Schliemann Defence",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "Bb5",
+      "f5",
+      "Nc3",
+      "fxe4",
+      "Nxe4",
+      "d5",
+      "Nxe5",
+      "dxe4",
+      "Nxc6",
+      "Qg5"
+     ],
+     "fu": 5,
+     "vu": 6
+    }
+   ]
+  },
+  {
+   "id": "w-scotch-game",
+   "name": "Scotch Game",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "w-scotch-game--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "d4",
+      "exd4",
+      "Nxd4",
+      "Bc5",
+      "Be3",
+      "Qf6",
+      "c3",
+      "Nge7",
+      "Bc4",
+      "Ne5"
+     ],
+     "fu": 5,
+     "vu": 8
+    },
+    {
+     "id": "w-scotch-game--mieses-variation",
+     "name": "Mieses Variation",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "d4",
+      "exd4",
+      "Nxd4",
+      "Nf6",
+      "Nxc6",
+      "bxc6",
+      "e5",
+      "Qe7",
+      "Qe2",
+      "Nd5",
+      "c4",
+      "Ba6"
+     ],
+     "fu": 5,
+     "vu": 8
+    },
+    {
+     "id": "w-scotch-game--scotch-gambit",
+     "name": "Scotch Gambit",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nc6",
+      "d4",
+      "exd4",
+      "Bc4",
+      "Bc5",
+      "O-O",
+      "d6",
+      "c3",
+      "Nf6",
+      "cxd4",
+      "Bb6"
+     ],
+     "fu": 5,
+     "vu": 7
+    }
+   ]
+  },
+  {
+   "id": "w-vienna-game",
+   "name": "Vienna Game",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "w-vienna-game--vienna-gambit",
+     "name": "Vienna Gambit",
+     "moves": [
+      "e4",
+      "e5",
+      "Nc3",
+      "Nf6",
+      "f4",
+      "d5",
+      "fxe5",
+      "Nxe4",
+      "Nf3",
+      "Be7",
+      "d3",
+      "Nxc3",
+      "bxc3",
+      "O-O"
+     ],
+     "fu": 3,
+     "vu": 5
+    },
+    {
+     "id": "w-vienna-game--mieses-variation",
+     "name": "Mieses Variation",
+     "moves": [
+      "e4",
+      "e5",
+      "Nc3",
+      "Nf6",
+      "g3",
+      "d5",
+      "exd5",
+      "Nxd5",
+      "Bg2",
+      "Nxc3",
+      "bxc3",
+      "Bd6"
+     ],
+     "fu": 3,
+     "vu": 5
+    }
+   ]
+  },
+  {
+   "id": "w-kings-gambit",
+   "name": "King's Gambit",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "w-kings-gambit--kieseritzky-gambit",
+     "name": "Kieseritzky Gambit",
+     "moves": [
+      "e4",
+      "e5",
+      "f4",
+      "exf4",
+      "Nf3",
+      "g5",
+      "h4",
+      "g4",
+      "Ne5",
+      "Nf6",
+      "Bc4",
+      "d5",
+      "exd5",
+      "Bd6"
+     ],
+     "fu": 3,
+     "vu": 4
+    },
+    {
+     "id": "w-kings-gambit--falkbeer-counter-gambit",
+     "name": "Falkbeer Counter-Gambit",
+     "moves": [
+      "e4",
+      "e5",
+      "f4",
+      "d5",
+      "exd5",
+      "e4",
+      "d3",
+      "Nf6",
+      "dxe4",
+      "Nxe4",
+      "Nf3",
+      "Bc5"
+     ],
+     "fu": 3,
+     "vu": 4
+    },
+    {
+     "id": "w-kings-gambit--kings-gambit-declined",
+     "name": "King's Gambit Declined",
+     "moves": [
+      "e4",
+      "e5",
+      "f4",
+      "Bc5",
+      "Nf3",
+      "d6",
+      "c3",
+      "Nf6",
+      "b4",
+      "Bb6"
+     ],
+     "fu": 3,
+     "vu": 4
+    }
+   ]
+  },
+  {
+   "id": "w-queens-gambit",
+   "name": "Queen's Gambit",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "w-queens-gambit--queens-gambit-declined",
+     "name": "Queen's Gambit Declined",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "e6",
+      "Nc3",
+      "Nf6",
+      "Bg5",
+      "Be7",
+      "e3",
+      "O-O",
+      "Nf3",
+      "h6",
+      "Bh4",
+      "b6"
+     ],
+     "fu": 3,
+     "vu": 4
+    },
+    {
+     "id": "w-queens-gambit--queens-gambit-accepted",
+     "name": "Queen's Gambit Accepted",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "dxc4",
+      "Nf3",
+      "Nf6",
+      "e3",
+      "e6",
+      "Bxc4",
+      "c5",
+      "O-O",
+      "a6"
+     ],
+     "fu": 3,
+     "vu": 4
+    },
+    {
+     "id": "w-queens-gambit--albin-counter-gambit",
+     "name": "Albin Counter-Gambit",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "e5",
+      "dxe5",
+      "d4",
+      "Nf3",
+      "Nc6",
+      "g3",
+      "Be6"
+     ],
+     "fu": 3,
+     "vu": 4
+    }
+   ]
+  },
+  {
+   "id": "w-london-system",
+   "name": "London System",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "w-london-system--main-line",
+     "name": "Main Line",
+     "moves": [
+      "d4",
+      "d5",
+      "Bf4",
+      "Nf6",
+      "e3",
+      "e6",
+      "Nf3",
+      "Bd6",
+      "Bg3",
+      "O-O",
+      "Nbd2",
+      "c5",
+      "c3",
+      "Nc6"
+     ],
+     "fu": 3,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "w-colle-system",
+   "name": "Colle System",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "w-colle-system--main-line",
+     "name": "Main Line",
+     "moves": [
+      "d4",
+      "d5",
+      "Nf3",
+      "Nf6",
+      "e3",
+      "e6",
+      "Bd3",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nbd2",
+      "Bd6",
+      "O-O",
+      "O-O"
+     ],
+     "fu": 5,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "w-catalan-opening",
+   "name": "Catalan Opening",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "w-catalan-opening--open-catalan",
+     "name": "Open Catalan",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "e6",
+      "g3",
+      "d5",
+      "Bg2",
+      "Be7",
+      "Nf3",
+      "O-O",
+      "O-O",
+      "dxc4",
+      "Qc2",
+      "a6"
+     ],
+     "fu": 3,
+     "vu": 12
+    },
+    {
+     "id": "w-catalan-opening--closed-catalan",
+     "name": "Closed Catalan",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "e6",
+      "g3",
+      "d5",
+      "Bg2",
+      "Be7",
+      "Nf3",
+      "O-O",
+      "O-O",
+      "Nbd7",
+      "Qc2",
+      "c6",
+      "Nbd2",
+      "b6"
+     ],
+     "fu": 3,
+     "vu": 12
+    }
+   ]
+  },
+  {
+   "id": "w-trompowsky-attack",
+   "name": "Trompowsky Attack",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "w-trompowsky-attack--main-line",
+     "name": "Main Line",
+     "moves": [
+      "d4",
+      "Nf6",
+      "Bg5",
+      "Ne4",
+      "Bf4",
+      "c5",
+      "f3",
+      "Qa5+",
+      "c3",
+      "Nf6",
+      "d5",
+      "Qb6",
+      "Qc2",
+      "d6"
+     ],
+     "fu": 3,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "w-english-opening",
+   "name": "English Opening",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "w-english-opening--symmetrical-variation",
+     "name": "Symmetrical Variation",
+     "moves": [
+      "c4",
+      "c5",
+      "Nc3",
+      "Nc6",
+      "g3",
+      "g6",
+      "Bg2",
+      "Bg7",
+      "Nf3",
+      "e6",
+      "O-O",
+      "Nge7"
+     ],
+     "fu": 1,
+     "vu": 2
+    },
+    {
+     "id": "w-english-opening--reversed-sicilian",
+     "name": "Reversed Sicilian",
+     "moves": [
+      "c4",
+      "e5",
+      "Nc3",
+      "Nf6",
+      "Nf3",
+      "Nc6",
+      "g3",
+      "d5",
+      "cxd5",
+      "Nxd5",
+      "Bg2",
+      "Nb6",
+      "O-O",
+      "Be7"
+     ],
+     "fu": 1,
+     "vu": 4
+    },
+    {
+     "id": "w-english-opening--botvinnik-system",
+     "name": "Botvinnik System",
+     "moves": [
+      "c4",
+      "e5",
+      "Nc3",
+      "Nc6",
+      "g3",
+      "g6",
+      "Bg2",
+      "Bg7",
+      "e4",
+      "d6",
+      "Nge2",
+      "Nge7",
+      "O-O",
+      "O-O"
+     ],
+     "fu": 1,
+     "vu": 4
+    }
+   ]
+  },
+  {
+   "id": "w-reti-opening",
+   "name": "Reti Opening",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "w-reti-opening--main-line",
+     "name": "Main Line",
+     "moves": [
+      "Nf3",
+      "d5",
+      "c4",
+      "e6",
+      "g3",
+      "Nf6",
+      "Bg2",
+      "Be7",
+      "O-O",
+      "O-O",
+      "b3",
+      "c5"
+     ],
+     "fu": 3,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "w-kings-indian-attack",
+   "name": "King's Indian Attack",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "w-kings-indian-attack--main-line",
+     "name": "Main Line",
+     "moves": [
+      "Nf3",
+      "d5",
+      "g3",
+      "Nf6",
+      "Bg2",
+      "e6",
+      "O-O",
+      "Be7",
+      "d3",
+      "O-O",
+      "Nbd2",
+      "c5",
+      "e4",
+      "Nc6"
+     ],
+     "fu": 3,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "w-birds-opening",
+   "name": "Bird's Opening",
+   "aliases": [],
+   "side": "w",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "w-birds-opening--main-line",
+     "name": "Main Line",
+     "moves": [
+      "f4",
+      "d5",
+      "Nf3",
+      "Nf6",
+      "e3",
+      "g6",
+      "b3",
+      "Bg7",
+      "Bb2",
+      "O-O",
+      "Be2",
+      "c5"
+     ],
+     "fu": 1,
+     "vu": 2
+    },
+    {
+     "id": "w-birds-opening--froms-gambit",
+     "name": "From's Gambit",
+     "moves": [
+      "f4",
+      "e5",
+      "fxe5",
+      "d6",
+      "exd6",
+      "Bxd6",
+      "Nf3",
+      "g5",
+      "g3",
+      "g4",
+      "Nh4",
+      "Ne7"
+     ],
+     "fu": 1,
+     "vu": 2
+    }
+   ]
+  }
+ ],
+ "b": [
+  {
+   "id": "b-sicilian-defence",
+   "name": "Sicilian Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "b-sicilian-defence--najdorf-variation",
+     "name": "Najdorf Variation",
+     "moves": [
+      "e4",
+      "c5",
+      "Nf3",
+      "d6",
+      "d4",
+      "cxd4",
+      "Nxd4",
+      "Nf6",
+      "Nc3",
+      "a6",
+      "Be3",
+      "e5",
+      "Nb3",
+      "Be6"
+     ],
+     "fu": 2,
+     "vu": 10
+    },
+    {
+     "id": "b-sicilian-defence--dragon-variation",
+     "name": "Dragon Variation",
+     "moves": [
+      "e4",
+      "c5",
+      "Nf3",
+      "d6",
+      "d4",
+      "cxd4",
+      "Nxd4",
+      "Nf6",
+      "Nc3",
+      "g6",
+      "Be3",
+      "Bg7",
+      "f3",
+      "O-O",
+      "Qd2",
+      "Nc6"
+     ],
+     "fu": 2,
+     "vu": 10
+    },
+    {
+     "id": "b-sicilian-defence--scheveningen-variation",
+     "name": "Scheveningen Variation",
+     "moves": [
+      "e4",
+      "c5",
+      "Nf3",
+      "d6",
+      "d4",
+      "cxd4",
+      "Nxd4",
+      "Nf6",
+      "Nc3",
+      "e6",
+      "Be2",
+      "Be7",
+      "O-O",
+      "O-O",
+      "f4",
+      "Nc6"
+     ],
+     "fu": 2,
+     "vu": 10
+    },
+    {
+     "id": "b-sicilian-defence--sveshnikov-variation",
+     "name": "Sveshnikov Variation",
+     "moves": [
+      "e4",
+      "c5",
+      "Nf3",
+      "Nc6",
+      "d4",
+      "cxd4",
+      "Nxd4",
+      "Nf6",
+      "Nc3",
+      "e5",
+      "Ndb5",
+      "d6",
+      "Bg5",
+      "a6",
+      "Na3",
+      "b5"
+     ],
+     "fu": 2,
+     "vu": 4
+    },
+    {
+     "id": "b-sicilian-defence--alapin-variation",
+     "name": "Alapin Variation",
+     "moves": [
+      "e4",
+      "c5",
+      "c3",
+      "Nf6",
+      "e5",
+      "Nd5",
+      "d4",
+      "cxd4",
+      "Nf3",
+      "Nc6",
+      "cxd4",
+      "d6"
+     ],
+     "fu": 2,
+     "vu": 3
+    },
+    {
+     "id": "b-sicilian-defence--closed-sicilian",
+     "name": "Closed Sicilian",
+     "moves": [
+      "e4",
+      "c5",
+      "Nc3",
+      "Nc6",
+      "g3",
+      "g6",
+      "Bg2",
+      "Bg7",
+      "d3",
+      "d6",
+      "Be3",
+      "e6"
+     ],
+     "fu": 2,
+     "vu": 3
+    }
+   ]
+  },
+  {
+   "id": "b-french-defence",
+   "name": "French Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "b-french-defence--advance-variation",
+     "name": "Advance Variation",
+     "moves": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "e5",
+      "c5",
+      "c3",
+      "Nc6",
+      "Nf3",
+      "Qb6",
+      "a3",
+      "c4",
+      "Nbd2",
+      "Na5"
+     ],
+     "fu": 2,
+     "vu": 5
+    },
+    {
+     "id": "b-french-defence--winawer-variation",
+     "name": "Winawer Variation",
+     "moves": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "Nc3",
+      "Bb4",
+      "e5",
+      "c5",
+      "a3",
+      "Bxc3+",
+      "bxc3",
+      "Ne7",
+      "Qg4",
+      "Qc7"
+     ],
+     "fu": 2,
+     "vu": 6
+    },
+    {
+     "id": "b-french-defence--tarrasch-variation",
+     "name": "Tarrasch Variation",
+     "moves": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "Nd2",
+      "Nf6",
+      "e5",
+      "Nfd7",
+      "Bd3",
+      "c5",
+      "c3",
+      "Nc6",
+      "Ne2",
+      "cxd4",
+      "cxd4",
+      "f6"
+     ],
+     "fu": 2,
+     "vu": 5
+    },
+    {
+     "id": "b-french-defence--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "Nc3",
+      "Nf6",
+      "Bg5",
+      "Be7",
+      "e5",
+      "Nfd7",
+      "Bxe7",
+      "Qxe7",
+      "f4",
+      "O-O",
+      "Nf3",
+      "c5"
+     ],
+     "fu": 2,
+     "vu": 6
+    },
+    {
+     "id": "b-french-defence--exchange-variation",
+     "name": "Exchange Variation",
+     "moves": [
+      "e4",
+      "e6",
+      "d4",
+      "d5",
+      "exd5",
+      "exd5",
+      "Nf3",
+      "Nf6",
+      "Bd3",
+      "Bd6",
+      "O-O",
+      "O-O",
+      "Bg5",
+      "Bg4"
+     ],
+     "fu": 2,
+     "vu": 5
+    }
+   ]
+  },
+  {
+   "id": "b-caro-kann-defence",
+   "name": "Caro-Kann Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "b-caro-kann-defence--advance-variation",
+     "name": "Advance Variation",
+     "moves": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "e5",
+      "Bf5",
+      "Nf3",
+      "e6",
+      "Be2",
+      "c5",
+      "Be3",
+      "Nd7"
+     ],
+     "fu": 2,
+     "vu": 5
+    },
+    {
+     "id": "b-caro-kann-defence--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "Nc3",
+      "dxe4",
+      "Nxe4",
+      "Bf5",
+      "Ng3",
+      "Bg6",
+      "h4",
+      "h6",
+      "Nf3",
+      "Nd7",
+      "h5",
+      "Bh7"
+     ],
+     "fu": 2,
+     "vu": 5
+    },
+    {
+     "id": "b-caro-kann-defence--exchange-variation",
+     "name": "Exchange Variation",
+     "moves": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "exd5",
+      "cxd5",
+      "Bd3",
+      "Nc6",
+      "c3",
+      "Nf6",
+      "Bf4",
+      "Bg4"
+     ],
+     "fu": 2,
+     "vu": 7
+    },
+    {
+     "id": "b-caro-kann-defence--panov-botvinnik-attack",
+     "name": "Panov-Botvinnik Attack",
+     "moves": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "exd5",
+      "cxd5",
+      "c4",
+      "Nf6",
+      "Nc3",
+      "e6",
+      "Nf3",
+      "Be7",
+      "cxd5",
+      "Nxd5"
+     ],
+     "fu": 2,
+     "vu": 7
+    },
+    {
+     "id": "b-caro-kann-defence--fantasy-variation",
+     "name": "Fantasy Variation",
+     "moves": [
+      "e4",
+      "c6",
+      "d4",
+      "d5",
+      "f3",
+      "dxe4",
+      "fxe4",
+      "e5",
+      "Nf3",
+      "Bg4",
+      "Bc4",
+      "Nd7"
+     ],
+     "fu": 2,
+     "vu": 5
+    }
+   ]
+  },
+  {
+   "id": "b-pirc-defence",
+   "name": "Pirc Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-pirc-defence--austrian-attack",
+     "name": "Austrian Attack",
+     "moves": [
+      "e4",
+      "d6",
+      "d4",
+      "Nf6",
+      "Nc3",
+      "g6",
+      "f4",
+      "Bg7",
+      "Nf3",
+      "O-O",
+      "Bd3",
+      "Na6"
+     ],
+     "fu": 2,
+     "vu": 7
+    },
+    {
+     "id": "b-pirc-defence--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "e4",
+      "d6",
+      "d4",
+      "Nf6",
+      "Nc3",
+      "g6",
+      "Nf3",
+      "Bg7",
+      "Be2",
+      "O-O",
+      "O-O",
+      "c6",
+      "a4",
+      "Nbd7"
+     ],
+     "fu": 2,
+     "vu": 7
+    },
+    {
+     "id": "b-pirc-defence--150-attack",
+     "name": "150 Attack",
+     "moves": [
+      "e4",
+      "d6",
+      "d4",
+      "Nf6",
+      "Nc3",
+      "g6",
+      "Be3",
+      "Bg7",
+      "Qd2",
+      "c6",
+      "f3",
+      "b5"
+     ],
+     "fu": 2,
+     "vu": 7
+    }
+   ]
+  },
+  {
+   "id": "b-scandinavian-defence",
+   "name": "Scandinavian Defence",
+   "aliases": [
+    "Centre Counter"
+   ],
+   "side": "b",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "b-scandinavian-defence--main-line",
+     "name": "Main Line",
+     "moves": [
+      "e4",
+      "d5",
+      "exd5",
+      "Qxd5",
+      "Nc3",
+      "Qa5",
+      "d4",
+      "Nf6",
+      "Nf3",
+      "c6",
+      "Bc4",
+      "Bf5"
+     ],
+     "fu": 2,
+     "vu": 4
+    },
+    {
+     "id": "b-scandinavian-defence--modern-variation",
+     "name": "Modern Variation",
+     "moves": [
+      "e4",
+      "d5",
+      "exd5",
+      "Nf6",
+      "d4",
+      "Nxd5",
+      "Nf3",
+      "g6",
+      "Be2",
+      "Bg7",
+      "O-O",
+      "O-O"
+     ],
+     "fu": 2,
+     "vu": 4
+    }
+   ]
+  },
+  {
+   "id": "b-alekhines-defence",
+   "name": "Alekhine's Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-alekhines-defence--modern-variation",
+     "name": "Modern Variation",
+     "moves": [
+      "e4",
+      "Nf6",
+      "e5",
+      "Nd5",
+      "d4",
+      "d6",
+      "Nf3",
+      "Bg4",
+      "Be2",
+      "e6",
+      "O-O",
+      "Be7"
+     ],
+     "fu": 2,
+     "vu": 7
+    },
+    {
+     "id": "b-alekhines-defence--four-pawns-attack",
+     "name": "Four Pawns Attack",
+     "moves": [
+      "e4",
+      "Nf6",
+      "e5",
+      "Nd5",
+      "d4",
+      "d6",
+      "c4",
+      "Nb6",
+      "f4",
+      "dxe5",
+      "fxe5",
+      "Nc6",
+      "Be3",
+      "Bf5"
+     ],
+     "fu": 2,
+     "vu": 7
+    }
+   ]
+  },
+  {
+   "id": "b-kings-indian-defence",
+   "name": "King's Indian Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-kings-indian-defence--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "g6",
+      "Nc3",
+      "Bg7",
+      "e4",
+      "d6",
+      "Nf3",
+      "O-O",
+      "Be2",
+      "e5",
+      "O-O",
+      "Nc6",
+      "d5",
+      "Ne7"
+     ],
+     "fu": 6,
+     "vu": 9
+    },
+    {
+     "id": "b-kings-indian-defence--samisch-variation",
+     "name": "Samisch Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "g6",
+      "Nc3",
+      "Bg7",
+      "e4",
+      "d6",
+      "f3",
+      "O-O",
+      "Be3",
+      "e5",
+      "Nge2",
+      "c6"
+     ],
+     "fu": 6,
+     "vu": 9
+    },
+    {
+     "id": "b-kings-indian-defence--four-pawns-attack",
+     "name": "Four Pawns Attack",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "g6",
+      "Nc3",
+      "Bg7",
+      "e4",
+      "d6",
+      "f4",
+      "O-O",
+      "Nf3",
+      "c5",
+      "dxc5",
+      "Qa5"
+     ],
+     "fu": 6,
+     "vu": 9
+    },
+    {
+     "id": "b-kings-indian-defence--fianchetto-variation",
+     "name": "Fianchetto Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "g6",
+      "Nf3",
+      "Bg7",
+      "g3",
+      "O-O",
+      "Bg2",
+      "d6",
+      "O-O",
+      "Nbd7",
+      "Nc3",
+      "e5",
+      "e4",
+      "c6"
+     ],
+     "fu": 6,
+     "vu": 6
+    }
+   ]
+  },
+  {
+   "id": "b-grunfeld-defence",
+   "name": "Grunfeld Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "b-grunfeld-defence--exchange-variation",
+     "name": "Exchange Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "g6",
+      "Nc3",
+      "d5",
+      "cxd5",
+      "Nxd5",
+      "e4",
+      "Nxc3",
+      "bxc3",
+      "Bg7",
+      "Nf3",
+      "c5"
+     ],
+     "fu": 6,
+     "vu": 7
+    },
+    {
+     "id": "b-grunfeld-defence--russian-system",
+     "name": "Russian System",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "g6",
+      "Nc3",
+      "d5",
+      "Nf3",
+      "Bg7",
+      "Qb3",
+      "dxc4",
+      "Qxc4",
+      "O-O",
+      "e4",
+      "Bg4",
+      "Be3",
+      "Nfd7"
+     ],
+     "fu": 6,
+     "vu": 7
+    }
+   ]
+  },
+  {
+   "id": "b-nimzo-indian-defence",
+   "name": "Nimzo-Indian Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-nimzo-indian-defence--rubinstein-variation",
+     "name": "Rubinstein Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "e6",
+      "Nc3",
+      "Bb4",
+      "e3",
+      "O-O",
+      "Bd3",
+      "d5",
+      "Nf3",
+      "c5",
+      "O-O",
+      "Nc6"
+     ],
+     "fu": 5,
+     "vu": 7
+    },
+    {
+     "id": "b-nimzo-indian-defence--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "e6",
+      "Nc3",
+      "Bb4",
+      "Qc2",
+      "O-O",
+      "a3",
+      "Bxc3+",
+      "Qxc3",
+      "b6",
+      "Bg5",
+      "Bb7"
+     ],
+     "fu": 5,
+     "vu": 7
+    },
+    {
+     "id": "b-nimzo-indian-defence--samisch-variation",
+     "name": "Samisch Variation",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "e6",
+      "Nc3",
+      "Bb4",
+      "a3",
+      "Bxc3+",
+      "bxc3",
+      "c5",
+      "e3",
+      "Nc6",
+      "Bd3",
+      "O-O"
+     ],
+     "fu": 5,
+     "vu": 7
+    }
+   ]
+  },
+  {
+   "id": "b-queens-indian-defence",
+   "name": "Queen's Indian Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "b-queens-indian-defence--main-line",
+     "name": "Main Line",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "e6",
+      "Nf3",
+      "b6",
+      "g3",
+      "Bb7",
+      "Bg2",
+      "Be7",
+      "O-O",
+      "O-O",
+      "Nc3",
+      "Ne4"
+     ],
+     "fu": 5,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "b-queens-gambit-declined",
+   "name": "Queen's Gambit Declined",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-queens-gambit-declined--tartakower-variation",
+     "name": "Tartakower Variation",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "e6",
+      "Nc3",
+      "Nf6",
+      "Bg5",
+      "Be7",
+      "e3",
+      "O-O",
+      "Nf3",
+      "h6",
+      "Bh4",
+      "b6"
+     ],
+     "fu": 4,
+     "vu": 12
+    },
+    {
+     "id": "b-queens-gambit-declined--exchange-variation",
+     "name": "Exchange Variation",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "e6",
+      "Nc3",
+      "Nf6",
+      "cxd5",
+      "exd5",
+      "Bg5",
+      "c6",
+      "e3",
+      "Be7",
+      "Bd3",
+      "Nbd7"
+     ],
+     "fu": 4,
+     "vu": 7
+    },
+    {
+     "id": "b-queens-gambit-declined--orthodox-defence",
+     "name": "Orthodox Defence",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "e6",
+      "Nc3",
+      "Nf6",
+      "Bg5",
+      "Be7",
+      "e3",
+      "O-O",
+      "Nf3",
+      "Nbd7",
+      "Rc1",
+      "c6"
+     ],
+     "fu": 4,
+     "vu": 12
+    }
+   ]
+  },
+  {
+   "id": "b-slav-defence",
+   "name": "Slav Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-slav-defence--main-line",
+     "name": "Main Line",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Nc3",
+      "dxc4",
+      "a4",
+      "Bf5",
+      "e3",
+      "e6",
+      "Bxc4",
+      "Bb4"
+     ],
+     "fu": 4,
+     "vu": 8
+    },
+    {
+     "id": "b-slav-defence--semi-slav-meran",
+     "name": "Semi-Slav, Meran",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "Nf3",
+      "Nf6",
+      "Nc3",
+      "e6",
+      "e3",
+      "Nbd7",
+      "Bd3",
+      "dxc4",
+      "Bxc4",
+      "b5",
+      "Bd3",
+      "a6"
+     ],
+     "fu": 4,
+     "vu": 8
+    },
+    {
+     "id": "b-slav-defence--exchange-slav",
+     "name": "Exchange Slav",
+     "moves": [
+      "d4",
+      "d5",
+      "c4",
+      "c6",
+      "cxd5",
+      "cxd5",
+      "Nc3",
+      "Nf6",
+      "Bf4",
+      "Nc6",
+      "e3",
+      "Bf5"
+     ],
+     "fu": 4,
+     "vu": 5
+    }
+   ]
+  },
+  {
+   "id": "b-dutch-defence",
+   "name": "Dutch Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-dutch-defence--stonewall-variation",
+     "name": "Stonewall Variation",
+     "moves": [
+      "d4",
+      "f5",
+      "g3",
+      "Nf6",
+      "Bg2",
+      "e6",
+      "Nf3",
+      "d5",
+      "O-O",
+      "c6",
+      "c4",
+      "Bd6"
+     ],
+     "fu": 2,
+     "vu": 8
+    },
+    {
+     "id": "b-dutch-defence--leningrad-variation",
+     "name": "Leningrad Variation",
+     "moves": [
+      "d4",
+      "f5",
+      "g3",
+      "Nf6",
+      "Bg2",
+      "g6",
+      "Nf3",
+      "Bg7",
+      "O-O",
+      "O-O",
+      "c4",
+      "d6",
+      "Nc3",
+      "Qe8"
+     ],
+     "fu": 2,
+     "vu": 6
+    },
+    {
+     "id": "b-dutch-defence--classical-variation",
+     "name": "Classical Variation",
+     "moves": [
+      "d4",
+      "f5",
+      "g3",
+      "Nf6",
+      "Bg2",
+      "e6",
+      "Nf3",
+      "Be7",
+      "O-O",
+      "O-O",
+      "c4",
+      "d6",
+      "Nc3",
+      "Qe8"
+     ],
+     "fu": 2,
+     "vu": 8
+    }
+   ]
+  },
+  {
+   "id": "b-benoni-defence",
+   "name": "Benoni Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 3,
+   "vars": [
+    {
+     "id": "b-benoni-defence--modern-benoni",
+     "name": "Modern Benoni",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "c5",
+      "d5",
+      "e6",
+      "Nc3",
+      "exd5",
+      "cxd5",
+      "d6",
+      "e4",
+      "g6",
+      "Nf3",
+      "Bg7"
+     ],
+     "fu": 4,
+     "vu": 6
+    },
+    {
+     "id": "b-benoni-defence--benko-gambit",
+     "name": "Benko Gambit",
+     "moves": [
+      "d4",
+      "Nf6",
+      "c4",
+      "c5",
+      "d5",
+      "b5",
+      "cxb5",
+      "a6",
+      "bxa6",
+      "Bxa6",
+      "Nc3",
+      "g6",
+      "Nf3",
+      "d6"
+     ],
+     "fu": 4,
+     "vu": 6
+    }
+   ]
+  },
+  {
+   "id": "b-petrov-defence",
+   "name": "Petrov Defence",
+   "aliases": [
+    "Russian Game",
+    "Petroff"
+   ],
+   "side": "b",
+   "difficulty": 1,
+   "vars": [
+    {
+     "id": "b-petrov-defence--main-line",
+     "name": "Main Line",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "Nf6",
+      "Nxe5",
+      "d6",
+      "Nf3",
+      "Nxe4",
+      "d4",
+      "d5",
+      "Bd3",
+      "Nc6",
+      "O-O",
+      "Be7"
+     ],
+     "fu": 4,
+     "vu": 0
+    }
+   ]
+  },
+  {
+   "id": "b-philidor-defence",
+   "name": "Philidor Defence",
+   "aliases": [],
+   "side": "b",
+   "difficulty": 2,
+   "vars": [
+    {
+     "id": "b-philidor-defence--main-line",
+     "name": "Main Line",
+     "moves": [
+      "e4",
+      "e5",
+      "Nf3",
+      "d6",
+      "d4",
+      "Nf6",
+      "Nc3",
+      "Nbd7",
+      "Bc4",
+      "Be7",
+      "O-O",
+      "O-O"
+     ],
+     "fu": 4,
+     "vu": 0
+    }
+   ]
+  }
+ ]
+}
