@@ -1,4 +1,4 @@
-// site/node_modules/@netlify/blobs/dist/chunk-XR3MUBBK.js
+// node_modules/@netlify/blobs/dist/chunk-XR3MUBBK.js
 var NF_ERROR = "x-nf-error";
 var NF_REQUEST_ID = "x-nf-request-id";
 var BlobsInternalError = class extends Error {
@@ -312,7 +312,7 @@ var getClientOptions = (options, contextOverride) => {
   return clientOptions;
 };
 
-// site/node_modules/@netlify/blobs/dist/main.js
+// node_modules/@netlify/blobs/dist/main.js
 var DEPLOY_STORE_PREFIX = "deploy:";
 var LEGACY_STORE_INTERNAL_PREFIX = "netlify-internal/legacy-namespace/";
 var SITE_STORE_PREFIX = "site:";
@@ -603,10 +603,10 @@ var getStore = (input) => {
   );
 };
 
-// site/src/api.mjs
+// src/api.mjs
 import crypto from "node:crypto";
 
-// site/src/openings.json
+// src/openings.json
 var openings_default = {
   w: [
     {
@@ -2591,7 +2591,7 @@ var openings_default = {
   ]
 };
 
-// site/src/api.mjs
+// src/api.mjs
 var TOKEN_DAYS = 30;
 var LAUNCH = Date.UTC(2026, 9, 17);
 var DAILY_COUNT = 5;
@@ -2923,10 +2923,20 @@ var routes = {
     await getStore(opts("xp")).setJSON(u.lower, { username: u.username, xp });
     return json({ ok: true });
   },
-  "GET /daily": async () => {
-    const d = todayStr();
+  // Today's set by default. ?date=YYYY-MM-DD returns an earlier day's set for the "previous challenges" list.
+  // Those can be played for fun but are never submitted, because /daily/submit only accepts today.
+  "GET /daily": async (req) => {
+    const t = todayStr();
+    const q = new URL(req.url).searchParams.get("date");
+    let d = t;
+    if (q) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(q) || Number.isNaN(Date.parse(q))) fail(400, "That isn't a valid date");
+      if (q > t) fail(400, "That challenge isn't out yet");
+      if (Date.parse(q) < LAUNCH) fail(404, "There was no challenge on that day");
+      d = q;
+    }
     const number = Math.round((Date.parse(d) - LAUNCH) / 864e5) + 1;
-    return json({ date: d, number, items: dailyPick(d) });
+    return json({ date: d, number, items: dailyPick(d), archive: d !== t });
   },
   "GET /daily/status": async (req) => {
     const u = await currentUser(req);
